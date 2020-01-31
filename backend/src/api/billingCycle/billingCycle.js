@@ -4,24 +4,24 @@ const mongoose = restful.mongoose;
 const creditSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, "Informe um nome para o crédito."]
     },
     value: {
         type: Number,
         min: 0,
-        required: true
+        required: [true, "Informe um valor para o crédito."]
     }
 });
 
 const debtSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, "Informe um nome para o débito."]
     },
     value: {
         type: Number,
         min: 0,
-        required: true
+        required: [true, "Informe um valor para o débito."]
     },
     status: {
         type: String,
@@ -48,8 +48,8 @@ const billingCycleSchema = new mongoose.Schema({
         max: 2100,
         required: true
     },
-    credits: creditSchema,
-    debts: debtSchema
+    credits: [creditSchema],
+    debts: [debtSchema]
 });
 
 module.exports = restful.model('BillingCycle', billingCycleSchema);
